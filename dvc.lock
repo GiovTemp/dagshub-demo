@@ -29,7 +29,7 @@ stages:
       md5: 2910bc798f44dc244424712c8f88e879
       size: 25679203
   split:
-    cmd: python code/split_train_test.py 0.2 1234
+    cmd: python code/split_train_test.py 0.15 1234
     deps:
     - path: code/split_train_test.py
       hash: md5
@@ -42,12 +42,12 @@ stages:
     outs:
     - path: data/Posts-test.tsv
       hash: md5
-      md5: b273ad4146169f95aa5d7a60221c7921
-      size: 5012174
+      md5: 6f4a8efb9009afb338d39a7a34236d03
+      size: 3749447
     - path: data/Posts-train.tsv
       hash: md5
-      md5: dfcd992c9c398201515eb879b7283101
-      size: 20898709
+      md5: c251017bc0a5374263dadfd44d77f421
+      size: 22161436
   featurize:
     cmd: python code/featurization.py
     deps:
@@ -57,21 +57,21 @@ stages:
       size: 2199
     - path: data/Posts-test.tsv
       hash: md5
-      md5: b273ad4146169f95aa5d7a60221c7921
-      size: 5012174
+      md5: 6f4a8efb9009afb338d39a7a34236d03
+      size: 3749447
     - path: data/Posts-train.tsv
       hash: md5
-      md5: dfcd992c9c398201515eb879b7283101
-      size: 20898709
+      md5: c251017bc0a5374263dadfd44d77f421
+      size: 22161436
     outs:
     - path: data/matrix-test.pkl
       hash: md5
-      md5: dafc0eb8b3806252d6bfe4678e2b5204
-      size: 2272922
+      md5: 0bc152e51c15e6b6a24e4ac2f646eb54
+      size: 1696794
     - path: data/matrix-train.pkl
       hash: md5
-      md5: af3da1ce67cde348e3171c0921f5086f
-      size: 9248499
+      md5: 38c0e71ca9ef034438405fe9438bcecc
+      size: 9828467
   train:
     cmd: python code/train_model.py 1234
     deps:
@@ -81,30 +81,30 @@ stages:
       size: 945
     - path: data/matrix-train.pkl
       hash: md5
-      md5: af3da1ce67cde348e3171c0921f5086f
-      size: 9248499
+      md5: 38c0e71ca9ef034438405fe9438bcecc
+      size: 9828467
     outs:
     - path: data/model.pkl
       hash: md5
-      md5: dbb3eaabddd578f44cfa2d416127aa2e
-      size: 6104090
+      md5: b1468cdcc27fa40ef2af0f2c81336bd2
+      size: 6595211
   evaluate:
     cmd: python code/evaluate.py
     deps:
     - path: code/evaluate.py
       hash: md5
-      md5: 64b33d7a9f1aef5a36ad12ab6bfd9523
-      size: 845
+      md5: ebad9c32588f4be5c6327795e2e839f8
+      size: 945
     - path: data/matrix-test.pkl
       hash: md5
-      md5: dafc0eb8b3806252d6bfe4678e2b5204
-      size: 2272922
+      md5: 0bc152e51c15e6b6a24e4ac2f646eb54
+      size: 1696794
     - path: data/model.pkl
       hash: md5
-      md5: dbb3eaabddd578f44cfa2d416127aa2e
-      size: 6104090
+      md5: b1468cdcc27fa40ef2af0f2c81336bd2
+      size: 6595211
     outs:
     - path: metrics/auc.metric
       hash: md5
-      md5: 9ed8553e1d3e783fd77c01c3dadb9695
+      md5: 810aa4d90499ee8f246f594f9641adbc
       size: 15
